@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caffeine With Me</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- AMBIENT LIGHT -->
+  <div id="ambient-light"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>coffee, but make it a vibe ☕✨</h1>
+
+      <p>
+        some days need focus.<br>
+        some days need comfort.<br>
+        some days need a coffee date.
+      </p>
+
+      <button onclick="scrollToMoods()">find my coffee vibe</button>
+
+      <span class="hero-sub">
+        built for moods, moments & main-character energy
+      </span>
+    </div>
+
+    <div class="floating-elements">☕ ☕ ☕</div>
+  </section>
+
+  <!-- IG QUOTE -->
+  <section class="ig-quote">
+    <p>
+      “romanticise your coffee.<br>
+      romanticise your life.”
+    </p>
+  </section>
+
+  <!-- MOODS -->
+  <section class="moods" id="moods">
+    <h2>what’s your coffee mood today?</h2>
+
+    <div class="mood-grid">
+      <div class="mood-card" onclick="showMood('focus')">🎧 deep focus</div>
+      <div class="mood-card" onclick="showMood('study')">🧠 solo sunday</div>
+      <div class="mood-card" onclick="showMood('dates')">💕 coffee dates</div>
+      <div class="mood-card" onclick="showMood('energy')">⏰ monday deadlines</div>
+      <div class="mood-card" onclick="showMood('night')">🌙 midnight cravings</div>
+      <div class="mood-card" onclick="showMood('creative')">🎨 creative chaos</div>
+    </div>
+  </section>
+
+  <!-- MOOD OUTPUT -->
+  <section class="mood-output" id="moodOutput">
+    <div class="vibe-card">
+      <h2 id="moodTitle"></h2>
+      <p id="moodDesc"></p>
+
+      <ul id="moodDrinks"></ul>
+
+      <!-- IG CAPTION -->
+      <div class="ig-caption">
+        <p id="captionText"></p>
+        <button class="copy-btn" onclick="copyCaption()">copy caption ✨</button>
+      </div>
+
+      <span class="vibe-tag">caffeine with me ☕</span>
+
+      <button class="share-btn" onclick="shareVibe()">share this vibe ✨</button>
+    </div>
+  </section>
+
+  <!-- CLEAN COFFEE -->
+  <section class="clean">
+    <h2>clean coffee. no fake stuff.</h2>
+    <p>
+      no artificial flavours.<br>
+      no sugar-first drinks.<br>
+      just beans, roast & real taste.
+    </p>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="events">
+    <h2>rituals we romanticise ☁️</h2>
+    <div class="event-list">
+      <div>☕ solo sunday — quiet coffee, loud thoughts</div>
+      <div>📊 monday deadlines — caffeine before chaos</div>
+      <div>🎨 creative chaos — ideas over perfection</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>what’s your coffee vibe today?</h2>
+    <p>study. date. overthink. romanticise life.</p>
+    <button>pull up ☕</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 caffeine with me</p>
+    <p>mood-driven coffee · screenshot this energy</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
