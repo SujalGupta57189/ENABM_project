@@ -11,7 +11,7 @@ body {
   line-height: 1.6;
 }
 
-/* Grain texture */
+/* Grain */
 body::after {
   content: "";
   position: fixed;
@@ -26,11 +26,7 @@ body::after {
 #ambient-light {
   position: fixed;
   inset: -30%;
-  background: radial-gradient(
-    circle at center,
-    rgba(255,200,150,0.25),
-    transparent 70%
-  );
+  background: radial-gradient(circle at center, rgba(255,200,150,0.25), transparent 70%);
   filter: blur(120px);
   z-index: -1;
   transition: background 1.2s ease;
@@ -228,6 +224,22 @@ body::after {
   text-align: center;
 }
 
+/* SOUND TOGGLE */
+#sound-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  border: none;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
 /* FOOTER */
 footer {
   padding: 2rem;
@@ -236,15 +248,9 @@ footer {
   background: #f6f1eb;
 }
 
-/* MOBILE SAFE */
+/* MOBILE */
 @media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-  .vibe-card {
-    width: 90%;
-  }
-  .ig-quote p {
-    font-size: 1.3rem;
-  }
+  .hero h1 { font-size: 2.2rem; }
+  .vibe-card { width: 90%; }
+  .ig-quote p { font-size: 1.3rem; }
 }
