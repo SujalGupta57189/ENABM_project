@@ -1,93 +1,256 @@
-function scrollToMoods() {
-  document.getElementById("moods").scrollIntoView({ behavior: "smooth" });
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* MOOD LIGHT COLORS */
-const moodLights = {
-  focus: "rgba(120,180,255,0.35)",
-  study: "rgba(180,220,200,0.35)",
-  dates: "rgba(255,160,180,0.4)",
-  energy: "rgba(255,210,120,0.45)",
-  night: "rgba(120,120,180,0.35)",
-  creative: "rgba(200,160,255,0.4)"
-};
-
-const moods = {
-  focus: {
-    title: "🎧 deep focus",
-    desc: "zero noise. clean caffeine. main character energy.",
-    drinks: ["espresso", "americano", "ristretto", "lungo"],
-    caption: "in my deep focus era ☕🎧\nno noise. just caffeine.\n#deepfocus #caffeinewithme"
-  },
-  study: {
-    title: "🧠 solo sunday",
-    desc: "calm mind. long sitting. soft comfort.",
-    drinks: ["caffè latte", "flat white", "raf coffee"],
-    caption: "solo sunday, coffee & my thoughts ☁️☕\n#solosunday #coffievibes"
-  },
-  dates: {
-    title: "💕 coffee dates",
-    desc: "slow sips, eye contact, soft conversations.",
-    drinks: ["mocha", "cappuccino", "vienna coffee"],
-    caption: "coffee dates > everything 💕☕\nslow sips & soft talks\n#coffeedate #romanticise"
-  },
-  energy: {
-    title: "⏰ monday deadlines",
-    desc: "fast caffeine. sharp focus. no excuses.",
-    drinks: ["espresso", "doppio", "americano"],
-    caption: "powered by deadlines & caffeine ⏰☕\n#mondaymood #deadlineenergy"
-  },
-  night: {
-    title: "🌙 midnight cravings",
-    desc: "late nights. low caffeine. emotional comfort.",
-    drinks: ["chocolate milk", "raf coffee", "glace"],
-    caption: "midnight coffee hits different 🌙☕\n#latenightvibes #decafmood"
-  },
-  creative: {
-    title: "🎨 creative chaos",
-    desc: "ideas > perfection. playful & experimental.",
-    drinks: ["frappe", "freddo", "caramel frappe"],
-    caption: "creating > overthinking 🎨☕\nchaos but make it cute\n#creativechaos"
-  }
-};
-
-function showMood(key) {
-  const mood = moods[key];
-
-  /* UPDATE AMBIENT LIGHT */
-  document.getElementById("ambient-light").style.background =
-    `radial-gradient(circle at center, ${moodLights[key]}, transparent 70%)`;
-
-  document.getElementById("moodTitle").innerText = mood.title;
-  document.getElementById("moodDesc").innerText = mood.desc;
-
-  const list = document.getElementById("moodDrinks");
-  list.innerHTML = "";
-  mood.drinks.forEach(drink => {
-    const li = document.createElement("li");
-    li.innerText = drink;
-    list.appendChild(li);
-  });
-
-  document.getElementById("captionText").innerText = mood.caption;
-
-  const output = document.getElementById("moodOutput");
-  output.style.display = "block";
-  output.scrollIntoView({ behavior: "smooth" });
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fafafa;
+  color: #111;
+  line-height: 1.6;
 }
 
-function copyCaption() {
-  const text = document.getElementById("captionText").innerText;
-  navigator.clipboard.writeText(text);
-  alert("caption copied ✨ paste it on your story");
+/* Grain */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 999;
 }
 
-function shareVibe() {
-  alert("screenshot this vibe 📸\nshare it on your story & tag @caffeinewithme ☕");
+/* AMBIENT LIGHT */
+#ambient-light {
+  position: fixed;
+  inset: -30%;
+  background: radial-gradient(circle at center, rgba(255,200,150,0.25), transparent 70%);
+  filter: blur(120px);
+  z-index: -1;
+  transition: background 1.2s ease;
+  pointer-events: none;
 }
 
-/* DEFAULT WARM GLOW */
-window.onload = () => {
-  document.getElementById("ambient-light").style.background =
-    "radial-gradient(circle at center, rgba(255,200,150,0.25), transparent 70%)";
-};
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1511920170033-f8396924c348");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+  color: #fff;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+}
+
+.hero p {
+  margin: 1.2rem 0 2rem;
+}
+
+.hero button {
+  padding: 0.9rem 1.8rem;
+  background: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hero-sub {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* Floating emojis */
+.floating-elements {
+  position: absolute;
+  right: 6%;
+  top: 15%;
+  font-size: 2.5rem;
+  opacity: 0.25;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-20px); }
+}
+
+/* IG QUOTE */
+.ig-quote {
+  padding: 5rem 2rem;
+  background: #111;
+  color: #fff;
+  text-align: center;
+}
+
+.ig-quote p {
+  font-size: 1.6rem;
+  font-family: 'Playfair Display', serif;
+}
+
+/* MOODS */
+.moods {
+  padding: 4rem 3rem;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.mood-card {
+  background:
+    linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)),
+    url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");
+  background-size: cover;
+  background-position: center;
+  padding: 2.5rem;
+  border-radius: 18px;
+  cursor: pointer;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.mood-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* MOOD OUTPUT */
+.mood-output {
+  padding: 4rem 2rem;
+  background: #111;
+  display: none;
+}
+
+/* VIBE CARD */
+.vibe-card {
+  max-width: 360px;
+  margin: auto;
+  padding: 2.5rem;
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)),
+    url("https://images.unsplash.com/photo-1517705008128-361805f42e86");
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+}
+
+.vibe-card ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.vibe-card li {
+  margin-bottom: 0.4rem;
+}
+
+.ig-caption {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 14px;
+  font-size: 0.85rem;
+}
+
+.copy-btn,
+.share-btn {
+  margin-top: 0.8rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 20px;
+  border: none;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.vibe-tag {
+  display: block;
+  margin-top: 1.2rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* CLEAN */
+.clean {
+  padding: 4rem 3rem;
+  background: #f1ede7;
+  text-align: center;
+}
+
+/* EVENTS */
+.events {
+  padding: 4rem 3rem;
+}
+
+.event-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.event-list div {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 24px;
+}
+
+/* CTA */
+.cta {
+  padding: 4rem 3rem;
+  background: #111;
+  color: #fff;
+  text-align: center;
+}
+
+/* SOUND TOGGLE */
+#sound-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  border: none;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+/* FOOTER */
+footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  background: #f6f1eb;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2.2rem; }
+  .vibe-card { width: 90%; }
+  .ig-quote p { font-size: 1.3rem; }
+}
